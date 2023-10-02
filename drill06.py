@@ -20,8 +20,10 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type and SDL_MOUSEMOTION:
+        elif event.type == SDL_MOUSEMOTION:
             mx, my = event.x, TUK_HEIGHT - 1 - event.y
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+            points.append((event.x, TUK_HEIGHT - 1 - event.y))# 클릭된 위치를 새로운 점으로 추가
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
     pass
@@ -39,7 +41,7 @@ def reset_world():
     frame = 0
     action = 3
 
-    points = [ (200, 500), (600, 600), (250, 100) ]
+    points = []
     set_new_target_arrow()
 
 
